@@ -1,0 +1,70 @@
+﻿
+<script typeof="text/javascript">
+
+    $(document).ready(function () {
+        var JSONItems = [];
+
+        var timecard = "";
+
+        $.getJSON("api/twitter", function (data) {
+            JSONItems = data;
+            console.log(JSONItems);
+
+            var tbl = $("#mytable1")
+            //$("#Tweets").append(tbl);
+
+
+
+            $.each($.parseJSON(data.Data), function (i, obj) {
+                var tr = "<tr>";
+
+				var td1 = "<td class='parameter-name'>" + obj.user.name + "</td>";
+                var td2 = "<td  class='parameter-name'>" + obj.user.screen_name + "</td>";
+                var td3 = "<td  class='parameter-name'>" +"<img src='"+obj.profile_image_url+"'/>" + "</td>";
+                var td4 = "<td  class='parameter-name'>" + obj.text + "</td>";
+                var td5 = "<td  class='parameter-name'>" + obj.retweet_count + "</td>";
+                var td6 = "<td  class='parameter-name'>" + obj.created_at + "</td></tr>";
+                $("#mytable1").append(tr + td1 + td2 + td3+td4+td5+td6);
+
+
+
+            });
+        });
+
+
+
+
+    })
+
+</script>
+
+<div class="timecard-table-container large-12 small-12 columns">
+
+</div>
+<div class="jumbotron">
+    <h1>SalesForce Demo App!</h1>
+    <p class="lead"> Welecome to your Twitter board! Please Click on Show Tweet button it display list of Tweets!</p>
+    <p>@*<a href="http://asp.net" class="btn btn-primary btn-lg">Show Tweets &raquo;</a>*@</p>
+
+    <link type="text/css" href="~/Areas/HelpPage/HelpPage.css" rel="stylesheet" />
+    <table id="mytable1" class="help-page-table" style="width: 100%; ">
+        <thead>
+            <tr>
+                <th>User Name</th>
+                <th>Screen name</th>
+                <th>Image url</th>
+                <th>Description</th>
+                <th>Retweeted Count</th>
+                <th>Tweet Crated Time</th>
+
+            </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+    </table>
+
+    <div id="Tweets">
+
+    </div>
+</div>
+
+
